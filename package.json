@@ -1,7 +1,9 @@
 {
+  "author": "Kranthi Lakum",
   "name": "react",
   "version": "0.0.0",
   "private": true,
+  "license": "MIT",
   "dependencies": {
     "bootstrap": "^4.5.3",
     "jquery": "1.9.1 - 3",
