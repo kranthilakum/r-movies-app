@@ -28,6 +28,7 @@ const App = () => {
   const addFavouriteMovie = movie => {
     const newFavouriteList = [...favourites, movie];
     setFavourites(newFavouriteList);
+    saveToLocalStorage(newFavouriteList);
   };
 
   const removeFavouriteMovie = movie => {
@@ -35,12 +36,24 @@ const App = () => {
       favourite => favourite.imdbID !== movie.imdbID
     );
     setFavourites(newFavouriteList);
+    saveToLocalStorage(newFavouriteList);
   };
+
+  const saveToLocalStorage = (items) => {
+		localStorage.setItem('react-movie-app-favourites', JSON.stringify(items));
+	};
 
   useEffect(() => {
     // the API call only happens when the app loads for the first time
     getMovieRequest(searchValue);
   }, [searchValue]);
+
+  useEffect(() => {
+		const movieFavourites = JSON.parse(
+			localStorage.getItem('react-movie-app-favourites')
+		);
+		setFavourites(movieFavourites);
+	}, []);
 
   return (
     <div className="container-fluid movie-app">
