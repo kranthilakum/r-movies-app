@@ -12,7 +12,7 @@ const App = () => {
   const [searchValue, setSearchValue] = useState("");
 
   const getMovieRequest = async () => {
-    const url = `https://www.omdbapi.com/?s=star%20wars&apikey=6b37a65b`;
+    const url = `https://www.omdbapi.com/?s=${searchValue}&apikey=6b37a65b`;
 
     const response = await fetch(url);
     const responseJson = await response.json();
@@ -24,8 +24,8 @@ const App = () => {
 
   useEffect(() => {
     // the API call only happens when the app loads for the first time
-    getMovieRequest();
-  }, []);
+    getMovieRequest(searchValue);
+  }, [searchValue]);
 
   return (
     <div className="container-fluid movie-app">
