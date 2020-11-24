@@ -5,6 +5,7 @@ import MovieList from "./MovieList";
 import MovieListHeading from "./MovieListHeading";
 import SearchBox from "./SearchBox";
 import AddFavourites from "./AddFavourites";
+import RemoveFavourites from "./RemoveFavourites";
 
 const App = () => {
   const API_KEY = process.env.REACT_APP_OMDB_API_KEY;
@@ -29,6 +30,13 @@ const App = () => {
     setFavourites(newFavouriteList);
   };
 
+  const removeFavouriteMovie = movie => {
+    const newFavouriteList = favourites.filter(
+      favourite => favourite.imdbID !== movie.imdbID
+    );
+    setFavourites(newFavouriteList);
+  };
+
   useEffect(() => {
     // the API call only happens when the app loads for the first time
     getMovieRequest(searchValue);
@@ -45,6 +53,16 @@ const App = () => {
           movies={movies}
           favouriteComponent={AddFavourites}
           handleFavouritesClick={addFavouriteMovie}
+        />
+      </div>
+      <div className="row d-flex align-items-center mt-4 mb-4">
+        <MovieListHeading heading="Favourites" />
+      </div>
+      <div className="row">
+        <MovieList
+          movies={favourites}
+          handleFavouritesClick={removeFavouriteMovie}
+          favouriteComponent={RemoveFavourites}
         />
       </div>
     </div>
